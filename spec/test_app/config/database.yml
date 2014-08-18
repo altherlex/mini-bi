@@ -1,0 +1,44 @@
+development:
+  adapter: ibm_db
+  database: DBDES3
+  username: desenv
+  password: envdes
+  schema: glb
+  host: 10.0.37.42
+  port: 60004
+  pool: 5
+  timeout: 5000
+  encoding: iso-8859-1
+  
+test:
+  adapter: ibm_db
+  database: DBVLD3
+  username: crmsoc
+  password: YRGDM9OAQKKjsY6v
+  schema: glb
+  host: 10.0.37.42
+  port: 60002
+  pool: 5
+  timeout: 5000
+
+validacao:
+  adapter: ibm_db
+  database: DBVLD3
+  username: crmsoc 
+  password: YRGDM9OAQKKjsY6v
+  schema: glb
+  host: 10.0.37.42
+  port: 60002
+  pool: 5
+  timeout: 5000
+  
+treinamento:
+  adapter: ibm_db
+  database: DBTRN2
+  username: db2inst4
+  password: makita
+  schema: glb
+  host: 10.0.32.83
+  port: 60004
+  pool: 5
+  timeout: 5000

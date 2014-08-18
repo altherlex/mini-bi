@@ -1,0 +1,23 @@
+<%= nav_menu do |m| %>
+  <%= link_to 'New Universe', new_universe_path, class:"btn btn-primary active", role:'button' %>
+<%end%>
+<table class='table table-striped'>
+  <tr>
+    <th>Name</th>
+    <th>Desc</th>
+    <th>Sql</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @universes.each do |universe| %>
+  <tr>
+    <td><%= universe.name %></td>
+    <td><%= universe.desc.truncate(15) %></td>
+    <td><%= universe.sql.truncate(20) %></td>
+    <td><%= link_to 'Show', universe, class:'btn btn-info btn-xs' %></td>
+    <td><%= link_to 'Edit', edit_universe_path(universe), :class=>'btn btn-default btn-xs' %></td>
+    <td><%= link_to 'Destroy', universe, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger' %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Universe:</b>
+  <%= @column.universe_id %>
+</p>
+
+<p>
+  <b>Tpo objeto:</b>
+  <%= @column.tpo_objeto %>
+</p>
+
+<p>
+  <b>Sta coluna filtro:</b>
+  <%= @column.sta_coluna_filtro %>
+</p>
+
+<p>
+  <b>Sta obrigado:</b>
+  <%= @column.sta_obrigado %>
+</p>
+
+<p>
+  <b>Dsc sql valores:</b>
+  <%= @column.dsc_sql_valores %>
+</p>
+
+<p>
+  <b>Txt apresentacao:</b>
+  <%= @column.txt_apresentacao %>
+</p>
+
+
+<%= link_to 'Edit', edit_column_path(@column) %> |
+<%= link_to 'Back', columns_path %>

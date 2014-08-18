@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  universe_id: 1
+  tpo_objeto: 
+  sta_coluna_filtro: 
+  sta_obrigado: 
+  dsc_sql_valores: MyText
+  txt_apresentacao: MyText
+
+two:
+  universe_id: 1
+  tpo_objeto: 
+  sta_coluna_filtro: 
+  sta_obrigado: 
+  dsc_sql_valores: MyText
+  txt_apresentacao: MyText

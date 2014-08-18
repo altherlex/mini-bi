@@ -1,0 +1,28 @@
+<%= simple_form_for(@column) do |f| %>
+  <%= nav_menu do |m| %>
+    <%= f.button :submit, class:"btn btn-primary active" %>
+    <%= link_to 'Back', universe_path(@column.universe), class:"btn btn-default" %>
+  <%end%>
+<!--
+  <% if @column.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@column.errors.count, "error") %> prohibited this column from being saved:</h2>
+
+      <ul>
+      <% @column.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+-->
+  <%= f.input :nme_termo %>
+  <%= f.input :dsc_termo %>
+  <%= f.input :tpo_objeto, as: :select, collection: domain('column.tpo_objeto') %>
+  <%#= f.label :sta_coluna_filtro %><br />
+  <%#= f.text_field :sta_coluna_filtro %>
+  <%= f.input :sta_coluna_filtro, as: :boolean %>
+  <%= f.input :sta_obrigado, :as=>:boolean %>
+  <%= f.input :dsc_sql_valores %>
+  <%= f.input :txt_apresentacao %>
+<% end %>

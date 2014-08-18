@@ -1,0 +1,44 @@
+<%= simple_form_for(@panel) do |f| %>
+  <%#= f.submit %>
+
+  <% if @panel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@panel.errors.count, "error") %> prohibited this panel from being saved:</h2>
+
+      <ul>
+      <% @panel.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="page-header">
+  <h2><%= best_in_place @panel, :name%> <small><%= best_in_place @panel, :description%></small></h2>
+</div>
+<div class="well well-sm">
+  <%= content_tag :a, "+ Add widget", :href => "#widget", :class => 'btn btn-default btn-sm', :data => {:toggle => 'modal'} %>
+  <%= modal_dialog :id => "widget",
+         :header => { :show_close => true, :dismiss => 'modal', :title => 'Modal header' },
+         :body   => { :content => 'This is the body' },
+         :footer => { :content => content_tag(:button, 'Save', :class => 'btn') } %>
+
+  <button type="button" class="btn btn-default btn-sm">Email</button>
+  <span style='cursor: pointer;'>
+    <%= best_in_place @panel, :private, :type => :checkbox, :collection => t(:'domain.panel.private') %>
+  </span>
+  <div style='float:right;'>
+    <button type="button" class="btn btn-default btn-sm">Exportar</button>
+    <%= content_tag :a, "Layout", :href => "#layout", :class => 'btn btn-default btn-sm', :data => {:toggle => 'modal'} %>
+    <%= modal_dialog :id => "layout",
+         :header => { :show_close => true, :dismiss => 'modal', :title => 'Layout' },
+         :body   => { :content => %{
+<div class="row">
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+</div>
+}.html_safe},
+         :footer => { :content => content_tag(:button, 'Save', :class => 'btn') } %>
+  <%#= f.text_field :layout %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,34 @@
+<%= simple_form_for @universe, html:{ role:"form"} do |f| %>
+<p id="notice"><%= notice %></p>
+<%= nav_menu do |m| %>
+  <%= link_to 'Edit', edit_universe_path(@universe), class:"btn btn-primary active", role:'button'%>
+  <%= link_to 'Back', universes_path, type:"button", class:"btn btn-default" %>
+<%end%>
+
+<%= f.input :name, :wrapper => :bs %>
+<%= f.input :desc, wrapper:'bs' %>
+<%= f.input :sql, wrapper:'bs' %></p>
+<ul id='my_tab' class="nav nav-tabs" role="tablist">
+  <li><a role="tab" href="#columns">Columns</a></li>
+  <li><a role="tab" href="#panels">Panels</a></li>
+  <li><a role="tab" href="#reports">Reports</a></li>
+</ul>
+<div id="my_tab_content" class="tab-content">
+   <div id="columns" class="tab-pane fade">
+      <%#= f.fields_for :columns do |builder| %>
+      <%= render 'columns/column_fields', :f => f.object %>
+      <%# end %>
+   </div>
+   <div id="panels" class="tab-pane fade">
+   </div>
+   <div id="reports" class="tab-pane fade">
+   </div>
+</div>
+<%end%>
+<script>
+$('#my_tab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+$('#my_tab a:first').tab('show')
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+  <%= stylesheet_link_tag    "mini-bi/application", :media => "all" %>
+  <%= javascript_include_tag "mini-bi/application" %>
+  <%= csrf_meta_tags %>
+  
+<!--
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+-->
+
+</head>
+<body>
+  <%= render :partial => 'layouts/header'%>
+<div id='wrapper'>
+  <%= render :partial => 'layouts/sidebar'%>
+  <div id='page-content-wrapper'>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+</body>
+</html>

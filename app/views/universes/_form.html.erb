@@ -1,0 +1,23 @@
+<%= simple_form_for(@universe) do |f| %>
+  <%= nav_menu do |m| %>
+    <%= f.button :submit, class:"btn btn-primary active" %>
+    <%= link_to 'Back', universes_path, class:"btn btn-default" %>
+  <%end%>
+<!--
+  <% if @universe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@universe.errors.count, "error") %> prohibited this universe from being saved:</h2>
+
+      <ul>
+      <% @universe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+#:todo eyah
+-->
+  <%= f.input :name %>
+  <%= f.input :desc %>
+  <%= f.input :sql %>
+<% end %>

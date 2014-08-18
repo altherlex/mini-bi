@@ -1,0 +1,24 @@
+<%= nav_menu do |m| %>
+  <%= link_to 'New', new_panel_path, class:"btn btn-primary active", role:'button' %>
+<%end%>
+
+<table class='table table-striped'>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Private</th>
+    <th>Layout</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @panels.each do |panel| %>
+  <tr>
+    <td><%= panel.name %></td>
+    <td><%= panel.description %></td>
+    <td><%= panel.private %></td>
+    <td><%= panel.layout %></td>
+    <td><%= link_to 'Edit', edit_panel_path(panel), :class=>'btn btn-default btn-xs' %></td>
+    <td><%= link_to 'Destroy', panel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger' %></td>
+  </tr>
+<% end %>
+</table>
