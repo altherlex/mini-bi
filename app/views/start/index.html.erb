@@ -1,6 +1,9 @@
-<h1>Start</h1>
-<a href="/universes">Universes</a>
-</br>
-<a href="/reports">Reports</a>
-</br>
-<a href="/panels">Panels</a>
+<%url_map = [['Universes', Universe.count, universes_path], ['Reports', 0, 'reports_path'], ['Panels', Panel.count, panels_path], ['Widgets', Widget.count, widgets_path]]%>
+<div class="list-group" style="width:26%">
+  <%url_map.each do |info|%>
+    <%=link_to info.last,class:'list-group-item' do %>
+      <%= info.first%>
+      <span class="badge"><%=info[1]%></span>
+    <%end%>
+  <%end%>
+</div>

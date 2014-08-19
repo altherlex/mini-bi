@@ -1,3 +1,7 @@
 = MiniBi
 
 This project rocks and uses MIT-LICENSE.
+
+Tools:
+
+Charts: http://www.highcharts.com

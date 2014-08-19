@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140813175504) do
+ActiveRecord::Schema.define(:version => 20140819125709) do
 
   create_table "acts_as_xapian_jobs", :force => true do |t|
     t.string  "model",    :null => false
@@ -1021,6 +1021,16 @@ ActiveRecord::Schema.define(:version => 20140813175504) do
     t.text      "sql",        :limit => 1048576
     t.timestamp "created_at",                    :null => false
     t.timestamp "updated_at",                    :null => false
+  end
+
+  create_table "widgets", :force => true do |t|
+    t.integer   "panel_id"
+    t.integer   "universe_id"
+    t.string    "title"
+    t.string    "subtitle"
+    t.string    "pattern"
+    t.timestamp "created_at",  :null => false
+    t.timestamp "updated_at",  :null => false
   end
 
 end

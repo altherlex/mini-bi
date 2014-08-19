@@ -55,15 +55,15 @@ SimpleForm.setup do |config|
   end
 
 config.wrappers :bs, :tag => 'div', :class => 'form-group' do |b|
-  b.use :html5
-  b.use :placeholder
+  #b.use :html5
+  #b.use :placeholder
   b.use :label_text, :tag=> 'label', :class => 'col-sm-2 control-label'
-  b.use :readonly
+  #b.use :readonly
   b.wrapper :tag => 'div', :class => 'col-sm-10' do |ba|
-    ba.use :readonly
+    #ba.use :readonly
     ba.use :desc, :tag=>'p', :class => 'form-control-static'
-    ba.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
-    ba.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
+    #ba.use :error, :wrap_with => { :tag => 'span', :class => 'help-inline' }
+    #ba.use :hint,  :wrap_with => { :tag => 'p', :class => 'help-block' }
   end
 end
 

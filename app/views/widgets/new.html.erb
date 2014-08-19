@@ -1,0 +1,15 @@
+<h1>New widget</h1>
+
+<%= simple_form_for(@widget) do |f| %>
+  <%= nav_menu do |m| %>
+    <%= f.button :submit, class:"btn btn-primary active" %>
+    <%= link_to 'Back', widgets_path, class:"btn btn-default" %>
+  <%end%>
+
+  <%= f.association :panel %>
+  <%= f.association :universe %>
+  <%= f.input :title %>
+  <%= f.input :subtitle %>
+  <%#= f.input :pattern %>
+  <%= f.input :pattern, as: :select, collection: domain('widget.pattern') %>
+<% end %>

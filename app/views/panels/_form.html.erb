@@ -18,7 +18,7 @@
 <div class="well well-sm">
   <%= content_tag :a, "+ Add widget", :href => "#widget", :class => 'btn btn-default btn-sm', :data => {:toggle => 'modal'} %>
   <%= modal_dialog :id => "widget",
-         :header => { :show_close => true, :dismiss => 'modal', :title => 'Modal header' },
+         :header => { :show_close => true, :dismiss => 'modal', :title=>'New widget'},
          :body   => { :content => 'This is the body' },
          :footer => { :content => content_tag(:button, 'Save', :class => 'btn') } %>
 
@@ -38,7 +38,8 @@
 </div>
 }.html_safe},
          :footer => { :content => content_tag(:button, 'Save', :class => 'btn') } %>
-  <%#= f.text_field :layout %>
+    <%#= f.text_field :layout %>
+    <%= link_to 'Destroy', @panel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-danger' %>
   </div>
 </div>
 <% end %>

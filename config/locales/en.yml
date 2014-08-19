@@ -12,6 +12,22 @@ en:
       private: 
         true: ! 'private'
         false: ! 'public'
+    feeds:
+      :url: 'http://www.google.com'
+      :label: 'default'
+    widget:
+      pattern:
+        [['Line chart', 'line'],
+         ['Spline chart', 'spline'],
+         ['Area chart', 'area'],
+         ['Areaspline chart', 'areaspline'],
+         ['Column chart', 'column'],
+         ['Bar chart', 'bar'],
+         ['Pie chart', 'pie'],
+         ['Scatter chart', 'scatter'],
+         ['Polar chart', 'polar'],
+         ['Angular gauges', 'angular'],
+         ['Range series', 'range']]
   date:
     abbr_day_names:
     - Sun

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<%= simple_form_for(@widget) do |f| %>
+  <div class="page-header">
+    <h2><%= @widget.title %><small> <%= @widget.subtitle %></small></h2>
+    <%= link_to 'Edit', edit_widget_path(@widget) %> |
+    <%= link_to 'Back', widgets_path %>
+  </div>
+
+  <%= link_to 'panel '+@widget.panel.name, @widget.panel %> |
+  <%= link_to 'universe '+@widget.universe.name, @widget.universe %>
+  <%#= f.input :pattern, :wrapper => :bs %>
+
+  <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+
+  <script>
+    <%=raw (render :partial => 'widgets/preview', :formats=>[:js])%>
+  </script>
+<% end %>
