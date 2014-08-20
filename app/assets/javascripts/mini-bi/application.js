@@ -11,6 +11,7 @@
 // require twitter/bootstrap
 // require_tree .
 //= require best_in_place
+//= require select2
 
 $(document).ready(function() {
   /* Activating Best In Place */

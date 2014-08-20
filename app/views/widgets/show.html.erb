@@ -1,19 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <%= simple_form_for(@widget) do |f| %>
+  <%= nav_menu do |m| %>
+    <%= link_to 'Edit', edit_widget_path(@widget), class:"btn btn-primary active" %>
+    <%= link_to 'Back', widgets_path, class:"btn btn-default" %>
+  <%end%>
+
   <div class="page-header">
     <h2><%= @widget.title %><small> <%= @widget.subtitle %></small></h2>
-    <%= link_to 'Edit', edit_widget_path(@widget) %> |
-    <%= link_to 'Back', widgets_path %>
+    <%= link_to 'panel '+@widget.panel.name, @widget.panel %> |
+    <%= link_to 'universe '+@widget.universe.name, @widget.universe %>
   </div>
-
-  <%= link_to 'panel '+@widget.panel.name, @widget.panel %> |
-  <%= link_to 'universe '+@widget.universe.name, @widget.universe %>
   <%#= f.input :pattern, :wrapper => :bs %>
-
-  <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
-
-  <script>
-    <%=raw (render :partial => 'widgets/preview', :formats=>[:js])%>
-  </script>
+  <%=raw (render :partial => 'widgets/preview', :formats=>[:js])%>
 <% end %>

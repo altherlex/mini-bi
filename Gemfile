@@ -39,4 +39,5 @@ end
 gem "best_in_place", :git=>'https://github.com/bernat/best_in_place.git'
 gem 'twitter-bootstrap-rails', :path=>'../twitter-bootstrap-rails' 
 #gem 'twitter-bootstrap-rails', :branch => 'bootstrap3', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "select2-rails"
 
