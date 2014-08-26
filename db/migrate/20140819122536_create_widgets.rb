@@ -5,7 +5,7 @@ class CreateWidgets < ActiveRecord::Migration
       t.integer :universe_id
       t.string :title, :default => 'New widget'
       t.string :subtitle
-      t.string :pattern
+      t.string :pattern # chart type:pie, column, line, ...
 
       t.timestamps
     end

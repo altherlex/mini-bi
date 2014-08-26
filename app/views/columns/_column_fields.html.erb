@@ -1,7 +1,7 @@
 <table class='table table-striped'>
   <tr>
-    <th>Column</th>
-    <th>Description</th>
+    <th>Source</th>
+    <th>Label</th>
     <th>Type</th>
     <th>Filtro</th>
     <th></th>
@@ -10,10 +10,10 @@
   </tr>
 <% f.columns.each do |column| %>
   <tr>
-    <td><%= column.nme_termo %></td>
-    <td><%= column.dsc_termo %></td>
-    <td><%= column.tpo_objeto %></td>
-    <td><%= column.sta_coluna_filtro %></td>
+    <td><%= column.name %></td>
+    <td><%= column.label %></td>
+    <td><%= column.aggregate %></td>
+    <td><%= column.filterable %></td>
     <td><%#= link_to 'Show', column %></td>
     <td><%= link_to 'Edit', edit_column_path(column), :class=>'btn btn-default btn-xs' %></td>
     <td><%= link_to 'Destroy', column, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger' %></td>

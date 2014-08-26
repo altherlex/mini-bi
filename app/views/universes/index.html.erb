@@ -13,7 +13,7 @@
 <% @universes.each do |universe| %>
   <tr>
     <td><%= universe.name %></td>
-    <td><%= universe.desc.truncate(15) %></td>
+    <td><%= universe.description.truncate(15) %></td>
     <td><%= universe.sql.truncate(20) %></td>
     <td><%= link_to 'Show', universe, class:'btn btn-info btn-xs' %></td>
     <td><%= link_to 'Edit', edit_universe_path(universe), :class=>'btn btn-default btn-xs' %></td>

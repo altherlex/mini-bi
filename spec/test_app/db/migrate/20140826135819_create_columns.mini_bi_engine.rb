@@ -1,3 +1,4 @@
+# This migration comes from mini_bi_engine (originally 20140730161721)
 class CreateColumns < ActiveRecord::Migration
   def up
     create_table :columns do |t|

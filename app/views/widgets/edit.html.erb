@@ -14,9 +14,9 @@
   <%#= f.input :pattern %>
   <%= f.input :pattern, disabled:true, as: :select, collection: domain('widget.pattern') %>
   <label>Dimension</label>
-  <%= select_tag :dimension_columns, options_from_collection_for_select(@widget.columns, :id, :nme_termo), multiple:true %> 
+  <%= select_tag :dimension_columns, options_from_collection_for_select(@widget.columns, :id, :name), multiple:true %> 
   <label>Metric</label>
-  <%= select_tag :metric_columns, options_from_collection_for_select(@widget.columns, :id, :nme_termo), multiple:true %> 
+  <%= select_tag :metric_columns, options_from_collection_for_select(@widget.columns, :id, :name), multiple:true %> 
   <%#= f.association :columns, id: :metric_cols, prompt: "Metric", label_method: :nme_termo, value_method: :id, multiple:true %>
 
   <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>

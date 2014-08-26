@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140819125709) do
+ActiveRecord::Schema.define(:version => 20140826135819) do
 
   create_table "acts_as_xapian_jobs", :force => true do |t|
     t.string  "model",    :null => false
@@ -22,17 +22,17 @@ ActiveRecord::Schema.define(:version => 20140819125709) do
   add_index "acts_as_xapian_jobs", ["model", "model_id"], :name => "index_acts_as_xapian_jobs_on_model_and_model_id", :unique => true
 
   create_table "columns", :force => true do |t|
-    t.integer   "universe_id",                                           :null => false
-    t.string    "nme_termo",                                             :null => false
-    t.string    "dsc_termo",                                             :null => false
+    t.integer   "universe_id",                                          :null => false
+    t.string    "name",                                                 :null => false
+    t.string    "label",                                                :null => false
     t.string    "tpo_dado"
-    t.string    "tpo_objeto",                           :default => "D"
-    t.string    "sta_coluna_filtro"
-    t.string    "sta_obrigado"
-    t.text      "dsc_sql_valores",   :limit => 1048576
+    t.string    "aggregate",                           :default => "D"
+    t.boolean   "filterable"
+    t.boolean   "mandatory"
+    t.text      "sql_values",       :limit => 1048576
     t.string    "txt_apresentacao"
-    t.timestamp "created_at",                                            :null => false
-    t.timestamp "updated_at",                                            :null => false
+    t.timestamp "created_at",                                           :null => false
+    t.timestamp "updated_at",                                           :null => false
   end
 
   create_table "glb_analise", :primary_key => "sqc_analise", :force => true do |t|
@@ -379,16 +379,16 @@ ActiveRecord::Schema.define(:version => 20140819125709) do
   end
 
   create_table "glb_orgao_lbv", :primary_key => "cdg_orgao_operacional", :force => true do |t|
-    t.boolean "sqc_endereco",                                   :null => false
+    t.boolean "cdg_orgao",                       :null => false
+    t.boolean "sqc_endereco",                    :null => false
     t.boolean "sqc_telefone"
-    t.boolean "cdg_tipo_orgao",                                 :null => false
-    t.integer "cdg_pessoa",                                     :null => false
-    t.date    "dta_inscricao",                                  :null => false
-    t.string  "sta_cgc",           :limit => 1,                 :null => false
+    t.boolean "cdg_tipo_orgao",                  :null => false
+    t.integer "cdg_pessoa",                      :null => false
+    t.date    "dta_inscricao",                   :null => false
+    t.string  "sta_cgc",           :limit => 1,  :null => false
     t.integer "nmr_cnae"
     t.date    "dta_baixa_cgc"
     t.string  "nme_usuario_baixa", :limit => 20
-    t.integer "cdg_orgao",                       :default => 0, :null => false
   end
 
   add_index "glb_orgao_lbv", ["cdg_pessoa", "sqc_endereco"], :name => "fk_pesend_org"
@@ -1006,31 +1006,12 @@ ActiveRecord::Schema.define(:version => 20140819125709) do
     t.string    "dsc_visualizacao",  :limit => 7500
   end
 
-  create_table "panels", :force => true do |t|
-    t.string    "name"
-    t.string    "description"
-    t.string    "private"
-    t.string    "layout"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
-  end
-
   create_table "universes", :force => true do |t|
     t.string    "name"
-    t.string    "desc"
-    t.text      "sql",        :limit => 1048576
-    t.timestamp "created_at",                    :null => false
-    t.timestamp "updated_at",                    :null => false
-  end
-
-  create_table "widgets", :force => true do |t|
-    t.integer   "panel_id"
-    t.integer   "universe_id"
-    t.string    "title"
-    t.string    "subtitle"
-    t.string    "pattern"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
+    t.string    "description"
+    t.text      "sql",         :limit => 1048576
+    t.timestamp "created_at",                     :null => false
+    t.timestamp "updated_at",                     :null => false
   end
 
 end

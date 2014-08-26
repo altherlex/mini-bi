@@ -44,7 +44,7 @@ class ColumnsController < MiniBiController
 
     respond_to do |format|
       if @column.save
-        format.html { redirect_to @column, notice: 'Column was successfully created.' }
+        format.html { redirect_to @column.universe, notice: 'Column was successfully created.' }
         format.json { render json: @column, status: :created, location: @column }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class ColumnsController < MiniBiController
 
     respond_to do |format|
       if @column.update_attributes(params[:column])
-        format.html { redirect_to @column, notice: 'Column was successfully updated.' }
+        format.html { redirect_to @column.universe, notice: 'Column was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

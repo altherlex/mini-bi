@@ -2,7 +2,7 @@ class CreateUniverses < ActiveRecord::Migration
   def up
     create_table :universes do |t|
       t.string :name
-      t.string :desc
+      t.string :description
       t.text :sql
 
       t.timestamps
