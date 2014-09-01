@@ -80,4 +80,19 @@ class UniversesController < MiniBiController
       format.json { head :no_content }
     end
   end
+  
+  def execute
+    result = 
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |product|
+        csv << product.attributes.values_at(*column_names)
+      end
+    end
+    respond_to do |format|
+      #format.html #TODO show the executed sql 
+      format.csv { send_data result }
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+    end
+  end # execute
 end

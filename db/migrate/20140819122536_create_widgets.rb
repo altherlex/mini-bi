@@ -6,6 +6,7 @@ class CreateWidgets < ActiveRecord::Migration
       t.string :title, :default => 'New widget'
       t.string :subtitle
       t.string :pattern # chart type:pie, column, line, ...
+      t.text :config # hash columns
 
       t.timestamps
     end

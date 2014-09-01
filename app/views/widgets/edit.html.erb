@@ -9,23 +9,19 @@
   
   <%= f.association :panel, disabled:true %>
   <%= f.association :universe, disabled:true %>
-  <%#= f.input :title %>
-  <%#= f.input :subtitle %>
-  <%#= f.input :pattern %>
-  <%= f.input :pattern, disabled:true, as: :select, collection: domain('widget.pattern') %>
-  <label>Dimension</label>
-  <%= select_tag :dimension_columns, options_from_collection_for_select(@widget.columns, :id, :name), multiple:true %> 
-  <label>Metric</label>
-  <%= select_tag :metric_columns, options_from_collection_for_select(@widget.columns, :id, :name), multiple:true %> 
-  <%#= f.association :columns, id: :metric_cols, prompt: "Metric", label_method: :nme_termo, value_method: :id, multiple:true %>
+  <%= f.input :pattern, disabled:false, as: :select, collection: domain('widget.pattern') %>
+  <%= f.input :d_cols, collection: @widget.columns.dim, as: :select, input_html: {multiple:'true', style:'width:300px', placeholder:'Dimension'} %>
+  <%= f.input :m_cols, collection: @widget.columns.metric, as: :select, input_html: {multiple:'true', style:'width:300px', placeholder:'Metric'} %>
 
   <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
 <% end %>
 <script>
 $(document).ready(
   function() { 
-    $("#dimension_columns").select2();
-    $("#metric_columns").select2();
+    $("#widget_d_cols").select2();
+    $("#widget_d_cols").select2('val', <%= raw @widget.d_cols.map(&:id)%>);
+    $("#widget_m_cols").select2();
+    $("#widget_m_cols").select2('val', <%= raw @widget.m_cols.map(&:id)%>);
   }
 );
 </script>

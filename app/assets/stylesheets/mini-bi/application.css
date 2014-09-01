@@ -9,11 +9,15 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- * require_tree .
- * require mini-bi/bootstrap_and_overrides.css
+ *= require bootstrap/bootstrap
+ *= require_tree .
  * require mini-bi/bootstrap_and_overrides.css.less
- *= require mini-bi/bootstrap.css
- *= require mini-bi/simple-sidebar.css
- *= require select2
+ * require twitter-bootstrap-static/fontawesome
+ * require twitter-bootstrap-static/bootstrap
+ * require bootstrap_and_overrides
+ * require mini-bi/bootstrap.css
+ * require mini-bi/simple-sidebar.css
+ * require select2
+ * require select2-bootstrap
  */
 

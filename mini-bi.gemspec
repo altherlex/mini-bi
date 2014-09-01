@@ -21,9 +21,9 @@ Gem::Specification.new do |s|
   s.add_dependency "jquery-rails"
   #s.add_dependency "twitter-bootstrap-rails"
   s.add_dependency "twitter-bootstrap-rails"
-    s.add_development_dependency 'rspec-rails'
-    #s.add_development_dependency 'capybara'
-    s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'rspec-rails'
+  #s.add_development_dependency 'capybara'
+  s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'shoulda'
 
   s.add_dependency "ibm_db", '2.5.11'

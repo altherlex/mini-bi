@@ -1,0 +1,2 @@
+id,name,description,sql,created_at,updated_at
+21,First,"","select name, description, count(*) as as_count from glb.universes",2014-08-26 14:04:32 UTC,2014-08-26 14:04:32 UTC

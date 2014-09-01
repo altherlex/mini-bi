@@ -6,12 +6,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require_tree ./bootstrap
-//= require ./bootstrap/bootstrap.js
-// require twitter/bootstrap
-// require_tree .
+//= require bootstrap/bootstrap
+// require ./bootstrap/bootstrap.js
+//= require_tree .
 //= require best_in_place
-//= require select2
+// require select2
+// require select2_locale_eu
 
 $(document).ready(function() {
   /* Activating Best In Place */

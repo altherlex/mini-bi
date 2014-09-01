@@ -156,4 +156,11 @@ RSpec.describe WidgetsController, :type => :controller do
     end
   end
 
+  describe "GET execute" do
+    it "execute query and generate json" do
+      widget = Widget.create! valid_attributes
+      get :edit, {:id => widget.to_param}, valid_session
+      expect(assigns(:widget)).to eq(widget)
+    end
+  end
 end

@@ -10,6 +10,5 @@
   <%= f.association :universe %>
   <%= f.input :title %>
   <%= f.input :subtitle %>
-  <%#= f.input :pattern %>
   <%= f.input :pattern, as: :select, collection: domain('widget.pattern') %>
 <% end %>

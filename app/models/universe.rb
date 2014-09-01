@@ -1,6 +1,6 @@
 class Universe < ActiveRecord::Base
   attr_accessible :description, :name, :sql
-  has_many :columns, :dependent => :destroy
+  has_many :columns, :dependent => :destroy, :order =>:id
   accepts_nested_attributes_for :columns, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
 
   #todo: possibilitar 'select *'
@@ -26,9 +26,9 @@ class Universe < ActiveRecord::Base
     errors.add(:sql, :sql_padrao) if invalido
   end
 
-  def load_query
+  def load_query(select_cols=nil)
     return unless self.valid?
-    [SELECT, mount_select, body, mount_where, mount_group_by].join(' ')
+    [SELECT, mount_select(select_cols), body, mount_where, mount_group_by(select_cols)].join(' ')
   end
 
   def executable?
@@ -46,13 +46,15 @@ class Universe < ActiveRecord::Base
     return sql.upcase.split(FROM).first.split(SELECT).last.squish
   end
   def mount_select(_cols=self.columns)
+    _cols = self.columns if _cols.nil? or _cols.empty?
     cols.select{|i| _cols.map(&:name).join(' ').include? Column.clean(i) }.join(', ')
   end
   def mount_where()
     return '' # TODO
   end
   def mount_group_by(_cols=self.columns)
-    "GROUP BY #{_cols.dim.map(&:name).join(', ')}" if columns.metric.present?
+    _cols = self.columns if _cols.nil? or _cols.empty?
+    "GROUP BY #{_cols.select(&:dimension?).map(&:name).join(', ')}" if columns.metric.present?
   end
 
   # todo: varificar se o sql é exequivel

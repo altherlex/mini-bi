@@ -15,13 +15,13 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'debugger'
-group :assets do
+#group :assets do
   gem "therubyracer"
   gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
   #gem "haml"
   gem 'sass-rails'
   gem 'coffee-rails'
-end
+#end
 #gem 'formtastic'
 #gem 'formtastic-bootstrap'
 gem 'simple_form'
@@ -38,6 +38,8 @@ end
 
 gem "best_in_place", :git=>'https://github.com/bernat/best_in_place.git'
 gem 'twitter-bootstrap-rails', :path=>'../twitter-bootstrap-rails' 
+gem 'bootstrap-rails-engine'
 #gem 'twitter-bootstrap-rails', :branch => 'master', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-gem "select2-rails"
+#gem "select2-rails", :branch=> 'master'
+#gem 'csv'
 
