@@ -16,9 +16,6 @@ class Widget < ActiveRecord::Base
     cols =  Column.find(config) if !config.nil? or !config.empty?
     @d_cols = cols.select(&:dimension?) if !config.nil? or !config.empty?
     @m_cols = cols.select(&:metric?) if !config.nil? or !config.empty?
-  rescue 
-    puts '*'*50
-    puts 'erro'
   end
 
   def crude_config

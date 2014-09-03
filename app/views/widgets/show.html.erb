@@ -7,7 +7,12 @@
   <%end%>
   <div class="page-header">
     <%= link_to 'panel '+@widget.panel.name, @widget.panel %> |
-    <%= link_to 'universe '+@widget.universe.name, @widget.universe %>
+    <%= link_to 'universe '+@widget.universe.name, @widget.universe %>|
+  <%= content_tag :a, "SQL", :href => "#sql", :class => 'btn btn-default btn-sm', :data => {:toggle => 'modal'} %>
+  <%= modal_dialog :id => "sql",
+         :header => { :show_close => true, :dismiss => 'modal', :title=>'SQL loaded'},
+         :body   => { :content => @widget.query },
+         :footer => {} %>
   </div>
   <%#= f.input :pattern, :wrapper => :bs %>
   <%=raw (render :partial => 'widgets/preview', :locals=> {widget: @widget})%>

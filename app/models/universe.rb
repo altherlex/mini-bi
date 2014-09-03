@@ -11,6 +11,10 @@ class Universe < ActiveRecord::Base
   DIVISER_COLUMNS = ','
   SELECT='SELECT'
   FROM = 'FROM'
+  # Compatible with databases
+  LIMIT = Universe.limit(1).to_sql.split('universes').last
+  # Reserves words for sql text
+  MARK_GROUP = '[GROUP_BY]'
   
   validates :name, presence: true
   validates_uniqueness_of :name
@@ -27,11 +31,20 @@ class Universe < ActiveRecord::Base
 
   def load_query(select_cols=nil)
     return unless self.valid?
-    [SELECT, mount_select(select_cols), body, mount_where, mount_group_by(select_cols)].join(' ')
+    mount = [SELECT, mount_select(select_cols), body, mount_where]
+    # set group by
+    if sql.include?(MARK_GROUP)
+      mount = mount.join(' ')
+      mount.gsub(MARK_GROUP, mount_group_by(select_cols))
+    else
+      mount <<  mount_group_by(select_cols)
+      mount = mount.join(' ')
+    end
+    return mount
   end
 
   def executable?
-    ActiveRecord::Base.connection.execute load_query+' FETCH FIRST 1 ROW ONLY'
+    ActiveRecord::Base.connection.execute load_query+LIMIT
     return true
   rescue
     false  

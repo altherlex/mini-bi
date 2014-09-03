@@ -45,7 +45,7 @@ RSpec.describe Widget, :type => :model do
       expect(@wid.d_cols.first).to be_a Column
     end
     it "generate a generic query" do
-      sql = 'SELECT ID, NAME, DESCRIPTION, COUNT(*) AS_COUNT FROM GLB.UNIVERSES GROUP BY ID, NAME, DESCRIPTION'.upcase.gsub('  ', ' ')
+      sql = 'SELECT NAME, ID, DESCRIPTION, COUNT(*) AS_COUNT FROM GLB.UNIVERSES GROUP BY ID, NAME, DESCRIPTION'.upcase.gsub('  ', ' ')
       wid = Widget.new(universe_id:@universe.id)
       expect(wid.load_query.upcase.gsub('  ', ' ')).to eq sql
     end

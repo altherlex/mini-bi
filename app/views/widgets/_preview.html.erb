@@ -12,7 +12,8 @@ $(document).ready(function() {
       subtitle: {text: '<%=raw widget.subtitle%>'},
       xAxis: { categories: [] },
       yAxis: { title: {text: 'Units'} },
-      series: []
+      series: [],
+      credits: {enabled: false},
     };	
  /*
  Load the data from the CSV file. This is the contents of the file:
@@ -25,7 +26,6 @@ $(document).ready(function() {
   //$.get('/data.csv', function(data){ set_info(data) } );
   arr = <%=raw export_csv(widget.execute).inspect%>;
   set_info(arr);  
-
   function set_info(data){
     // Split the lines
     var lines = data.split('\n');

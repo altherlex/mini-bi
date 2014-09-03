@@ -43,7 +43,7 @@ module MiniBiHelper
   def domain(label)
     I18n.t ["domain", label.to_s].join('.')
   end
-  
+
   # export CSV
   def export_csv(arr_record, options={})
     return '' if arr_record.nil? or arr_record.empty?

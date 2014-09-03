@@ -1,6 +1,8 @@
-<h1>Listing widgets</h1>
-
-<table>
+<%= nav_menu do |m| %>
+  <%= link_to 'New Widget', new_widget_path, class:"btn btn-primary active", role:'button' %>
+<%end%>
+<br>
+<table class='table table-striped'>
   <tr>
     <th>Panel</th>
     <th>Universe</th>
@@ -11,7 +13,6 @@
     <th></th>
     <th></th>
   </tr>
-
 <% @widgets.each do |widget| %>
   <tr>
     <td><%= widget.panel_id %></td>
@@ -19,13 +20,9 @@
     <td><%= widget.title %></td>
     <td><%= widget.subtitle %></td>
     <td><%= widget.pattern %></td>
-    <td><%= link_to 'Show', widget %></td>
-    <td><%= link_to 'Edit', edit_widget_path(widget) %></td>
-    <td><%= link_to 'Destroy', widget, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', widget, class:'btn btn-info btn-xs'  %></td>
+    <td><%= link_to 'Edit', edit_widget_path(widget), :class=>'btn btn-default btn-xs' %></td>
+    <td><%= link_to 'Destroy', widget, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger' %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Widget', new_widget_path %>
