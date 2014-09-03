@@ -15,14 +15,19 @@ class Column < ActiveRecord::Base
   scope :metric, where(aggregate: METRIC)
 
   class << self
-    def clean(str_col)
+    def alias_name(str_col)
       return str_col.split(/\W+/).last
     end 
+    alias_method :clean, :alias_name 
+
+    def have_aggregate?(col_name)
+      FUNCOES_AGREGACAO.find{|fn| col_name.upcase =~ fn}.present?
+    end
     def new_cols(cols=[])
       result = []
       cols.each do |col|
-        n = clean(col)
-        agg = (FUNCOES_AGREGACAO.find{|fn| col.upcase =~ fn}.present?)? METRIC : DIMENSION
+        n = alias_name(col)
+        agg = (have_aggregate?(col))? METRIC : DIMENSION
         f = (agg!=METRIC)? true : false
         result << Column.new({name:n, aggregate:agg, filterable:f})
       end
@@ -40,7 +45,7 @@ class Column < ActiveRecord::Base
   end
 
   def name=(value)
-     super value.upcase
+    super value.upcase
   end
 
   private

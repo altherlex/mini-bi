@@ -9,7 +9,7 @@ RSpec.describe Widget, :type => :model do
     @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id})
     @wid.pattern = 'line'
   end
-  context "Config", focus:true do
+  context "Config" do
     it "new Widget" do
       expect(@wid.save!).to be true
     end
@@ -30,14 +30,9 @@ RSpec.describe Widget, :type => :model do
       wid = Widget.find(@wid.id)
       expect(wid.d_cols).not_to be_nil
       expect(wid.m_cols).not_to be_nil
-
-      #expect(@wid.d_cols).to eq d 
-      #expect(@wid.m_cols).to eq m
-      #expect(@wid.config.empty?).to eq true
-      #expect(@wid.config==wid.config).to eq true
     end
   end #context config column
-  context "Dimension|Metric columns" do
+  context "Configuring the Panel", focus:true do
     before(:each) do
       @wid.d_cols = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
       @wid.m_cols = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
@@ -50,15 +45,43 @@ RSpec.describe Widget, :type => :model do
       expect(@wid.d_cols.first).to be_a Column
     end
     it "generate a generic query" do
-      sql = 'SELECT COUNT(*) AS_COUNT, ID, NAME, DESCRIPTION FROM GLB.UNIVERSES GROUP BY ID, NAME, DESCRIPTION'.upcase.gsub('  ', ' ')
+      sql = 'SELECT ID, NAME, DESCRIPTION, COUNT(*) AS_COUNT FROM GLB.UNIVERSES GROUP BY ID, NAME, DESCRIPTION'.upcase.gsub('  ', ' ')
       wid = Widget.new(universe_id:@universe.id)
       expect(wid.load_query.upcase.gsub('  ', ' ')).to eq sql
     end
     it "generate a specific query" do
       expect(@wid.select_cols.size).to eq(2)
-      expect(@wid.universe.mount_select(@wid.select_cols)).to eq("COUNT(*) AS_COUNT, NAME")
-      sql = 'SELECT COUNT(*) AS_COUNT, NAME FROM GLB.UNIVERSES GROUP BY NAME'.upcase.gsub('  ', ' ')
+      expect(@wid.universe.mount_select(@wid.select_cols)).to eq("NAME, COUNT(*) AS_COUNT")
+      sql = 'SELECT NAME, COUNT(*) AS_COUNT FROM GLB.UNIVERSES GROUP BY NAME'.upcase.gsub('  ', ' ')
       expect(@wid.load_query.upcase.gsub('  ', ' ')).to eq sql
     end
-  end
+    it "execute query" do 
+      expect(@wid.load_query).not_to be_nil
+      stmt = @wid.execute
+      expect(stmt).not_to be_empty
+      expect(stmt.size).to be 1
+      expect(stmt.first).to be_an_instance_of(Widget)
+    end
+    it "attributes of query execution" do 
+      stmt =  @wid.execute
+      attr = [@wid.d_cols.map(&:name).map(&:downcase), @wid.m_cols.map(&:name).map(&:downcase)].flatten
+      expect(stmt.first.attribute_names).to eq attr
+    end
+  end # context Configuration
+  context "erro.... when create a widget but not find" do
+    before(:each) do
+      @universe = Universe.create({
+        name:'My own universe',
+        sql:'select count(*) as_count, id, name, description from glb.universes'})
+      @panel = Panel.create({name:'Panel'})
+      @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id, pattern:'line'})
+      @wid.d_cols = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
+      @wid.m_cols = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
+      @wid.save!
+    end
+    it "no call after_find" do
+      raise @wid.query.inspect
+      raise helper.export_csv(Universe.all).inspect
+    end
+  end #Context
 end

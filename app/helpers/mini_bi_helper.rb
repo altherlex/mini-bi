@@ -43,4 +43,15 @@ module MiniBiHelper
   def domain(label)
     I18n.t ["domain", label.to_s].join('.')
   end
+  
+  # export CSV
+  def export_csv(arr_record, options={})
+    return '' if arr_record.nil? or arr_record.empty?
+    CSV.generate(options) do |csv|
+      csv << arr_record.first.attribute_names
+      arr_record.each do |record|
+        csv << record.attributes.values_at(*record.attribute_names)
+      end
+    end
+  end
 end 

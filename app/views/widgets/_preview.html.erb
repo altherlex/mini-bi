@@ -14,19 +14,23 @@ $(document).ready(function() {
       yAxis: { title: {text: 'Units'} },
       series: []
     };	
-	/*
-	 Load the data from the CSV file. This is the contents of the file:
-		Apples,Pears,Oranges,Bananas,Plums
-		John,8,4,6,5
-		Jane,3,4,2,3
-		Joe,86,76,79,77
-		Janet,3,16,13,15
+ /*
+ Load the data from the CSV file. This is the contents of the file:
+	Apples,Pears,Oranges,Bananas,Plums
+	John,8,4,6,5
+	Jane,3,4,2,3
+	Joe,86,76,79,77
+	Janet,3,16,13,15
   */ 
-  $.get('/data.csv', function(data) {
+  //$.get('/data.csv', function(data){ set_info(data) } );
+  arr = <%=raw export_csv(widget.execute).inspect%>;
+  set_info(arr);  
+
+  function set_info(data){
     // Split the lines
     var lines = data.split('\n');
     $.each(lines, function(lineNo, line){
-      var items = line.split(';');
+      var items = line.split(',');
 
       // header line containes categories
       if (lineNo == 0) {
@@ -48,8 +52,7 @@ $(document).ready(function() {
         options.series.push(series);
       }
     }); 
-    console.log(a = options);
     var chart = new Highcharts.Chart(options);
-  }); 
+  }
 });
 </script>

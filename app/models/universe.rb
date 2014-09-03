@@ -8,7 +8,6 @@ class Universe < ActiveRecord::Base
     [/SELECT *\*/,/INSERT *INTO/, /UPDATE/, /DELETE *FROM/, /CREATE *TABLE/, /ALTER *TABLE/, /DROP *TABLE/, /DESCRIBE *TABLE/, /COMMIT/, /ROLLBACK/]
   COMANDOS_SQL_VALIDOS = [/SELECT.*FROM/]
 
-  FUNCOES_AGREGACAO = [/SUM\([\w|.|\s]+\)/i, /COUNT\([\w|.|\s]+\)/i, /AVG\([\w|.|\s]+\)/i, /MIN\([\w|.|\s]+\)/i, /MAX\([\w|.|\s]+\)/i]
   DIVISER_COLUMNS = ','
   SELECT='SELECT'
   FROM = 'FROM'
@@ -47,7 +46,9 @@ class Universe < ActiveRecord::Base
   end
   def mount_select(_cols=self.columns)
     _cols = self.columns if _cols.nil? or _cols.empty?
-    cols.select{|i| _cols.map(&:name).join(' ').include? Column.clean(i) }.join(', ')
+    r=cols.select{|i| _cols.map(&:name).join(' ').include? Column.clean(i) }.join(DIVISER_COLUMNS+' ')
+    #Aggregate Columns are left side
+    r.split(DIVISER_COLUMNS).sort{|i| i<=>Column.alias_name(i)}.join(DIVISER_COLUMNS+' ').strip
   end
   def mount_where()
     return '' # TODO
