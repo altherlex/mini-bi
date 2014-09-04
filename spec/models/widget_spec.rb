@@ -9,7 +9,7 @@ RSpec.describe Widget, :type => :model do
     @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id})
     @wid.pattern = 'line'
   end
-  context "Config" do
+  context "CRUDE" do
     it "new Widget" do
       expect(@wid.save!).to be true
     end
@@ -32,7 +32,7 @@ RSpec.describe Widget, :type => :model do
       expect(wid.m_cols).not_to be_nil
     end
   end #context config column
-  context "Configuring the Panel", focus:true do
+  context "Configuring the Panel" do
     before(:each) do
       @wid.d_cols = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
       @wid.m_cols = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
@@ -48,6 +48,13 @@ RSpec.describe Widget, :type => :model do
       sql = 'SELECT NAME, ID, DESCRIPTION, COUNT(*) AS_COUNT FROM GLB.UNIVERSES GROUP BY ID, NAME, DESCRIPTION'.upcase.gsub('  ', ' ')
       wid = Widget.new(universe_id:@universe.id)
       expect(wid.load_query.upcase.gsub('  ', ' ')).to eq sql
+    end
+    it "generate a generic query with limit rows", focus:true do
+      sql = 'SELECT NAME, ID, DESCRIPTION, COUNT(*) AS_COUNT FROM GLB.UNIVERSES [GROUP BY] fetch first 5 row only'.upcase.gsub('  ', ' ')
+      uni = Universe.create({name:'GROUP', sql:sql})
+      uni.save!
+      wid = Widget.new(universe_id:uni.id)
+      expect(wid.load_query.upcase.gsub('  ', ' ').strip).to eq sql.gsub('[GROUP BY]', 'GROUP BY NAME, ID, DESCRIPTION').strip
     end
     it "generate a specific query" do
       expect(@wid.select_cols.size).to eq(2)
@@ -68,20 +75,22 @@ RSpec.describe Widget, :type => :model do
       expect(stmt.first.attribute_names).to eq attr
     end
   end # context Configuration
-  context "erro.... when create a widget but not find" do
+  context "COLS:columns of widget", focus:true do
     before(:each) do
-      @universe = Universe.create({
-        name:'My own universe',
-        sql:'select count(*) as_count, id, name, description from glb.universes'})
-      @panel = Panel.create({name:'Panel'})
       @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id, pattern:'line'})
-      @wid.d_cols = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
-      @wid.m_cols = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
-      @wid.save!
+      @wid.d_cols = [@universe.columns.map(&:id)]
     end
-    it "no call after_find" do
-      raise @wid.query.inspect
-      raise helper.export_csv(Universe.all).inspect
+    it "for config attribute" do 
+      a = @wid.d_cols
+      #raise @wid.crude_config.inspect
+      @wid.save!
+      #raise @wid.crude_config.inspect
+      b = @wid.d_cols
+#raise a.map(&:id).inspect
+      expect(a==b).to eq true
+      @wid = Widget.find @wid.id
+      #c = @wid.d_cols
+      #expect(a==c).to eq true
     end
   end #Context
 end

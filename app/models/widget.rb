@@ -12,10 +12,8 @@ class Widget < ActiveRecord::Base
  
   after_find :after_find
   def after_find
-    cols = []
-    cols =  Column.find(config) if !config.nil? or !config.empty?
-    @d_cols = cols.select(&:dimension?) if !config.nil? or !config.empty?
-    @m_cols = cols.select(&:metric?) if !config.nil? or !config.empty?
+    @d_cols = cols(config).select(&:dimension?)
+    @m_cols = cols(config).select(&:metric?)
   end
 
   def crude_config
@@ -43,16 +41,22 @@ class Widget < ActiveRecord::Base
   def select_cols
     ((self.d_cols||@d_cols||[])+(self.m_cols||@m_cols||[]))
   end
-
+  def cols(values)
+    unless values.nil?
+      Column.find values.select(&:present?)
+    else
+      []
+    end
+  end
   def d_cols=(values)
-    @d_cols = values.select(&:present?)
+    @d_cols = cols(values)
   end
   def m_cols=(values)
-    @m_cols = values.select(&:present?)
+    @m_cols = cols(values)
   end
 
   private
   before_save do |r| 
-    r[:config] = select_cols.to_yaml
+    r[:config] = select_cols.map(&:id).to_yaml
   end
 end
