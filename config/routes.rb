@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :widgets do 
-    get :execute, :on=>:member
+    get :export, :on=>:member
   end
   resources :panels
 
@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   resources :columns
 
-  resources :universes
+  resources :universes do
+#    resources :widgets do
+#      get :export, on: :member
+#    end
+  end
   root :to => "start#index"
 end

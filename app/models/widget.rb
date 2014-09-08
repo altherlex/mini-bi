@@ -12,8 +12,8 @@ class Widget < ActiveRecord::Base
  
   after_find :after_find
   def after_find
-    @d_cols = cols(config).select(&:dimension?)
-    @m_cols = cols(config).select(&:metric?)
+    @d_cols = cols.select(&:dimension?)
+    @m_cols = cols.select(&:metric?)
   end
 
   def crude_config
@@ -41,13 +41,15 @@ class Widget < ActiveRecord::Base
   def select_cols
     ((self.d_cols||@d_cols||[])+(self.m_cols||@m_cols||[]))
   end
-  def cols(values)
+  def cols(values=self.config)
     unless values.nil?
       Column.find values.select(&:present?)
     else
       []
     end
   end
+  alias_method :columns, :cols
+
   def d_cols=(values)
     @d_cols = cols(values)
   end

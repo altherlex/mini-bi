@@ -30,8 +30,8 @@ RSpec.describe WidgetsController, :type => :routing do
     it "routes to #destroy" do
       expect(:delete => "/widgets/1").to route_to("widgets#destroy", :id => "1")
     end
-    it "routes to #execute" do
-      expect(:get => "/widgets/1/execute").to route_to("widgets#execute", :id => "1")
+    it "routes to #export" do
+      expect(:get => "/widgets/1/export").to route_to("widgets#export", :id => "1")
     end
   end
 end

@@ -1,4 +1,5 @@
 class WidgetsController < MiniBiController
+  include WidgetsHelper
   # GET /widgets
   # GET /widgets.json
   def index
@@ -78,6 +79,18 @@ class WidgetsController < MiniBiController
     respond_to do |format|
       format.html { redirect_to widgets_url }
       format.json { head :no_content }
+    end
+  end
+
+  def export
+    @widget = Widget.find params[:id]
+    stmt = @widget.execute
+    #@wid.columns.map(&:label).inspect
+    stmt_json = JSON.parse(stmt.to_json)
+    result = {:success => true, :data=>for_widget(@widget, stmt_json), :result=>stmt.to_json}
+    respond_to do |format|
+      format.html{ render :text => result[:data].inspect }
+      format.json { render :json => result }
     end
   end
 end

@@ -156,11 +156,42 @@ RSpec.describe WidgetsController, :type => :controller do
     end
   end
 
-  describe "GET execute" do
-    it "execute query and generate json" do
-      widget = Widget.create! valid_attributes
-      get :edit, {:id => widget.to_param}, valid_session
-      expect(assigns(:widget)).to eq(widget)
+  describe "GET export", focus:true do
+    before(:each) do
+      @universe = Universe.create({
+        name:'A little universe',
+        sql:'select count(*) as_count, id, name, description from glb.universes'})
+      @panel = Panel.create({name:'Panel'})
+      @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id})
+      @wid.pattern = 'line'
+      @wid.d_cols = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
+      @wid.m_cols = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
+      @wid.save!
+    end
+    it "generate json" do
+      request.accept = "application/json"
+      get :export, id:@wid.id, :format => :json
+      retorno = JSON.parse(response.body)
+      expect(retorno['success']).to be true
+    end
+    it "json should be key label" do
+      get :export, id:@wid.id, :format => :json
+      retorno = JSON.parse(response.body)
+      
+      #raise @wid.columns.map(&:label).inspect
+      #raise retorno.inspect
+      #raise retorno['data'].first.keys.inspect
+      expect(retorno['success']).to be true
+      
+      #csv << arr_record.first.attribute_names
+      # arr_record.each do |record|
+      #  csv << record.attributes.values_at(*record.attribute_names)
+
+      raise retorno.inspect
+      skip "TODOOOOOOOO: ----- Deve trazer os dados da execucao da query do widget em CSV"
+      #widget = Widget.create! valid_attributes
+      #get :edit, {:id => widget.to_param}, valid_session
+      #expect(assigns(:widget)).to eq(widget)
     end
   end
 end
