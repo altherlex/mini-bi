@@ -23,7 +23,4 @@ RSpec.describe MiniBiHelper, :type => :helper do
     #temporary
     @wid = Widget.find @wid.id
   end
-  it "Export CSV" do
-   raise export_csv(@wid.execute).inspect
-  end
 end

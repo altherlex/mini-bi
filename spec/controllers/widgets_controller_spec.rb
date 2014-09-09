@@ -187,7 +187,7 @@ RSpec.describe WidgetsController, :type => :controller do
       # arr_record.each do |record|
       #  csv << record.attributes.values_at(*record.attribute_names)
 
-      raise retorno.inspect
+      #raise retorno.inspect
       skip "TODOOOOOOOO: ----- Deve trazer os dados da execucao da query do widget em CSV"
       #widget = Widget.create! valid_attributes
       #get :edit, {:id => widget.to_param}, valid_session

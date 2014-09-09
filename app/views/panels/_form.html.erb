@@ -43,3 +43,13 @@
   </div>
 </div>
 <% end %>
+<div class="row">
+  <% @panel.widgets.each do |wid|%>
+    <div class="panel panel-default">
+    <%div_id = 'container'+rand(1000).to_s %>
+      <div id='<%= div_id %>' class="panel-body">
+        <%=raw (render :partial => 'widgets/preview', :locals=> {widget: wid, div_id:div_id})%>
+      </div>
+    </div>
+  <%end%>
+</div>

@@ -9,17 +9,20 @@ RSpec.describe Widget, :type => :model do
     @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id})
     @wid.pattern = 'line'
   end
+
   context "CRUDE" do
     it "new Widget" do
       expect(@wid.save!).to be true
     end
-    it "before save" do
+=begin
+    it "all", focus:true do
       metric = ['', '1', '2']
       @wid.d_cols = metric
       @wid.m_cols = metric
       expect(@wid.d_cols).to eq(['1', '2'])
       expect(@wid.m_cols).to eq(['1', '2'])
     end
+=end
     it "after save" do
       d = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
       m = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
@@ -39,6 +42,9 @@ RSpec.describe Widget, :type => :model do
       @wid.save!
       @wid = Widget.find @wid.id
     end
+    #it "executing query with JSON" do 
+    #  raise @wid.execute_json.inspect
+    #end
     it "column config when find" do
       expect(@wid.config).to be_a Array
       expect(@wid.config.size).to eq(2)
@@ -49,7 +55,7 @@ RSpec.describe Widget, :type => :model do
       wid = Widget.new(universe_id:@universe.id)
       expect(wid.load_query.upcase.gsub('  ', ' ')).to eq sql
     end
-    it "generate a generic query with limit rows", focus:true do
+    it "generate a generic query with limit rows" do
       sql = 'SELECT NAME, ID, DESCRIPTION, COUNT(*) AS_COUNT FROM GLB.UNIVERSES [GROUP BY] fetch first 5 row only'.upcase.gsub('  ', ' ')
       uni = Universe.create({name:'GROUP', sql:sql})
       uni.save!
@@ -75,18 +81,15 @@ RSpec.describe Widget, :type => :model do
       expect(stmt.first.attribute_names).to eq attr
     end
   end # context Configuration
-  context "COLS:columns of widget", focus:true do
+  context "COLS:columns of widget" do
     before(:each) do
       @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id, pattern:'line'})
       @wid.d_cols = [@universe.columns.map(&:id)]
     end
     it "for config attribute" do 
       a = @wid.d_cols
-      #raise @wid.crude_config.inspect
       @wid.save!
-      #raise @wid.crude_config.inspect
       b = @wid.d_cols
-#raise a.map(&:id).inspect
       expect(a==b).to eq true
       @wid = Widget.find @wid.id
       #c = @wid.d_cols

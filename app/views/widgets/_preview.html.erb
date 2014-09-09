@@ -1,27 +1,21 @@
-<div class="panel panel-default">
-  <div id='container' class="panel-body">
-  </div>
-</div>
 <script>
 $(document).ready(function() {
   var options = {
-    chart: {
-      renderTo: 'container',
-      type: '<%= raw widget.pattern%>' },
-      title: { text: '<%=raw widget.title %>' },
-      subtitle: {text: '<%=raw widget.subtitle%>'},
-      xAxis: { categories: [] },
-      yAxis: { title: {text: ''} },
-      series: [],
-      credits: {enabled: false},
-    };	
+    chart: { renderTo: '<%= div_id %>', type: '<%= raw widget.pattern%>' },
+    title: { text: '<%=raw widget.title %>' },
+    subtitle: {text: '<%=raw widget.subtitle%>'},
+    xAxis: { categories: [] },
+    yAxis: { title: {text: ''} },
+    series: [],
+    credits: {enabled: false},
+  };	
   
   $.get('<%= export_widget_path(widget, :json) %>', function(data){ 
     options = $.extend( options, data.data);
     console.log(a=options);
     var chart = new Highcharts.Chart(options);
   });
-  //arr = <%=raw export_csv(widget.execute).inspect%>;
+  //arr = <%#=raw export_csv(widget.execute).inspect%>;
   //set_info(arr);  
   function set_info(data){
     // Split the lines

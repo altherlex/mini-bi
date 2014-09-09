@@ -1,14 +1,14 @@
 module WidgetsHelper
-  def for_widget(wid, stmt)
-    d = wid.columns.select(&:dimension?)
-    m = wid.columns.select(&:metric?)
+  def for_widget(wid, stmt=nil)
+    stmt = wid.execute_json if stmt.nil?
+    d = wid.cols.select(&:dimension?)
+    m = wid.cols.select(&:metric?)
 
-    #raise stmt.first.values_at(d.map{|i| i.name.downcase}).inspect
-    #raise d.map{|i| i.name.downcase}.inspect
-    #raise stmt.first.inspect
-    series = stmt.map do |hs| 
-      { name: hs.values_at(*d.map{|i| i.name.downcase}), data: hs.values_at(*m.map{|i| i.name.downcase}) }
+    data = stmt.map do |hs| 
+      { name: hs.values_at(*d.map{|i| i.name.downcase}), 
+        data: hs.values_at(*m.map{|i| i.name.downcase}) }
     end
+ 
     return {
         xAxis: {
             categories: d.map(&:label) 
@@ -16,47 +16,10 @@ module WidgetsHelper
         yAxis: {
             title: { text: m.map(&:label) },
         },
-       series: series
-=begin
-       series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
-=end
-   }
-=begin
-/* FOR highcharts  */
-// STEP1
-       series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
-
-//STEP2
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: { text: 'Temperature (°C)' },
-        },
-=end
+       series: (wid.pie?)? for_pie(data, m.map(&:label).join): data
+    }
+  end
+  def for_pie(data, name_slice)
+    series = [{type: 'pie', name:name_slice, data:data.map(&:values).map(&:flatten)}]
   end
 end

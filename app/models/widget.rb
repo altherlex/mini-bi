@@ -9,13 +9,13 @@ class Widget < ActiveRecord::Base
   validates :universe_id, presence: true
   validates :panel_id, presence: true
   validates :pattern, presence: true
- 
+
   after_find :after_find
   def after_find
     @d_cols = cols.select(&:dimension?)
     @m_cols = cols.select(&:metric?)
   end
-
+ 
   def crude_config
     self[:config]
   end
@@ -37,10 +37,18 @@ class Widget < ActiveRecord::Base
   def execute
     Widget.find_by_sql load_query
   end
+  def execute_json
+    JSON.parse(execute.to_json)
+  end
+  def pie?
+    pattern=='pie'
+  end
   
   def select_cols
     ((self.d_cols||@d_cols||[])+(self.m_cols||@m_cols||[]))
   end
+#  alias_method :cols, :select_cols
+
   def cols(values=self.config)
     unless values.nil?
       Column.find values.select(&:present?)
@@ -48,13 +56,15 @@ class Widget < ActiveRecord::Base
       []
     end
   end
-  alias_method :columns, :cols
+  #alias_method :columns, :cols
 
   def d_cols=(values)
     @d_cols = cols(values)
+    #self.config = [self.config, values].flatten
   end
   def m_cols=(values)
     @m_cols = cols(values)
+    #self.config = [self.config, values].flatten
   end
 
   private
