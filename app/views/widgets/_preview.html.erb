@@ -8,13 +8,16 @@ $(document).ready(function() {
     yAxis: { title: {text: ''} },
     series: [],
     credits: {enabled: false},
+    plotOptions: { pie: {allowPointSelect: true, cursor: 'pointer', animation:false} }
   };	
   
-  $.get('<%= export_widget_path(widget, :json) %>', function(data){ 
-    options = $.extend( options, data.data);
+  //$.get('<%= export_widget_path(widget, :json) %>', function(data){ 
+    options = $.extend( options, <%= raw for_widget(widget).to_json%>);
+  //  options = $.extend( options, data.data);
     console.log(a=options);
     var chart = new Highcharts.Chart(options);
-  });
+  //});
+
   //arr = <%#=raw export_csv(widget.execute).inspect%>;
   //set_info(arr);  
   function set_info(data){

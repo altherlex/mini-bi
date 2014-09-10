@@ -1,6 +1,7 @@
 class Universe < ActiveRecord::Base
   attr_accessible :description, :name, :sql
   has_many :columns, :dependent => :destroy, :order =>:id
+  has_many :widgets, :dependent => :destroy, :order =>:id
   accepts_nested_attributes_for :columns, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
 
   #todo: possibilitar 'select *'

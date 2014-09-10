@@ -1,0 +1,22 @@
+<table class='table table-striped'>
+  <tr>
+    <th>Source</th>
+    <th>Label</th>
+    <th>Type</th>
+    <th>Filtro</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% f.widgets.each do |column| %>
+  <tr>
+    <td><%= column.name %></td>
+    <td><%= column.label %></td>
+    <td><%= column.aggregate %></td>
+    <td><%= column.filterable %></td>
+    <td><%#= link_to 'Show', column %></td>
+    <td><%= link_to 'Edit', edit_column_path(column), :class=>'btn btn-default btn-xs' %></td>
+    <td><%= link_to 'Destroy', column, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger' %></td>
+  </tr>
+<% end %>
+</table>

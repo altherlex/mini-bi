@@ -1,7 +1,7 @@
 <%= simple_form_for(@universe) do |f| %>
   <%= nav_menu do |m| %>
     <%= f.button :submit, class:"btn btn-primary active" %>
-    <%= link_to 'Back', universes_path, class:"btn btn-default" %>
+    <%= link_to 'Back', (params[:action]=='new')? universes_path: universe_path, class:"btn btn-default" %>
   <%end%>
 <!--
   <% if @universe.errors.any? %>

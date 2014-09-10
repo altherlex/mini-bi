@@ -10,16 +10,15 @@
 <%= f.input :sql, wrapper:'bs' %></p>
 <ul id='my_tab' class="nav nav-tabs" role="tablist">
   <li><a role="tab" href="#columns">Columns</a></li>
-  <li><a role="tab" href="#panels">Panels</a></li>
+  <li><a role="tab" href="#widgets">Widgets</a></li>
   <li><a role="tab" href="#reports">Reports</a></li>
 </ul>
 <div id="my_tab_content" class="tab-content">
    <div id="columns" class="tab-pane fade">
-      <%#= f.fields_for :columns do |builder| %>
       <%= render 'columns/column_fields', :f => f.object %>
-      <%# end %>
    </div>
-   <div id="panels" class="tab-pane fade">
+   <div id="widgets" class="tab-pane fade">
+      <%= render partial:'widgets/list', locals:{widgets:@universe.widgets}%>
    </div>
    <div id="reports" class="tab-pane fade">
    </div>

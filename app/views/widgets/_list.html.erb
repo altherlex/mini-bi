@@ -1,0 +1,24 @@
+<table class='table table-striped'>
+  <tr>
+    <th>Universe</th>
+    <th>Panel</th>
+    <th>Title</th>
+    <th>Subtitle</th>
+    <th>Pattern</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% widgets.each do |widget| %>
+  <tr>
+    <td><%= link_to widget.universe.name, widget.universe %></td>
+    <td><%= link_to widget.panel.name, widget.panel %></td>
+    <td><%= widget.title %></td>
+    <td><%= widget.subtitle %></td>
+    <td><%= widget.pattern %></td>
+    <td><%= link_to 'Show', widget, class:'btn btn-info btn-xs'  %></td>
+    <td><%= link_to 'Edit', edit_widget_path(widget), :class=>'btn btn-default btn-xs' %></td>
+    <td><%= link_to 'Destroy', widget, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger' %></td>
+  </tr>
+<% end %>
+</table>

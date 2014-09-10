@@ -42,4 +42,4 @@ gem 'bootstrap-rails-engine'
 #gem 'twitter-bootstrap-rails', :branch => 'master', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 #gem "select2-rails", :branch=> 'master'
 #gem 'csv'
-
+gem 'whenever', :require => false
