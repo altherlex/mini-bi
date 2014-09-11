@@ -1,54 +1,33 @@
-<%#= simple_form_for(panel, id:'tess') do |f| %>
-<div class="btn-group btn-group-justified">
-  <div class="btn-group m">
-    <button id='12' class="btn btn-default" style='padding: 0px;height: 100px;' type="button">
-      <div class="b op col-md-12">100%</div>
-    </button>
-  </div>
-  <div class="btn-group m">
-    <button id='6,6'type="button" style='padding: 0px;height: 100px;' class="btn btn-default">
-      <div class="b op col-md-6">50%</div>
-      <div class="b col-md-6">50%</div>
-    </button>
-  </div>
-  <div class="btn-group m">
-    <button id='3,3,3,3' type="button" style='padding: 0px;height: 100px;' class="btn btn-default">
-      <div class="b op col-md-3">25%</div>
-      <div class="b op col-md-3">25%</div>
-      <div class="b op col-md-3">25%</div>
-      <div class="b col-md-3">25%</div>
-    </button>
-  </div>
-</div><br>
-<div class="btn-group btn-group-justified">
-  <div class="btn-group m">
-    <button id='4,8' type="button" style='padding: 0px;height: 100px;' class="btn btn-default">
-      <div class="b op col-md-4">30%</div>
-      <div class="b col-md-8">70%</div>
-    </button>
-  </div>
-  <div id='3,6,3' class="btn-group m">
-    <button type="button" style='padding: 0px;height: 100px;' class="btn btn-default">
-      <div class="b op col-md-3">30%</div>
-      <div class="b op col-md-6">40%</div>
-      <div class="b col-md-3">30%</div>
-    </button>
-  </div>
-  <div class="btn-group m">
-    <button id='8,4' type="button" style='padding: 0px;height: 100px;' class="btn btn-default">
-      <div class="b op col-md-8">70%</div>
-      <div class="b col-md-4">30%</div>
-    </button>
-  </div>
-</div>
-<%#end%>
+<%= f.hidden_field :layout %>
+<% domain('panel.layout').in_groups_of(3).each do |codon|%>
+  <div class="btn-group btn-group-justified">
+  <% codon.each do |layout| %>
+    <div class="btn-group m">
+      <button id='<%= layout.gsub(',', '_') %>' value='<%=layout%>' onclick="set_value('#<%=layout.gsub(',', '_')%>')" class="btn btn-default" style='padding: 0px;height: 100px;' type="button">
+        <% layout.split(',').each do |part|%>
+          <%= content_tag(:div, part.to_s+'%', class:"b op", style:"width:#{part}%;")%>
+        <%end%>
+      </button>
+    </div>
+  <%end%>
+  </div><br>
+<%end%>
 <script>
 $(document).ready(function() {
-  $('#<%= panel.layout%>').addClass('focus');  
+  $('#<%= panel.layout.gsub(',', '_')%>').addClass('focus');  
   //$('#66').removeClass('focus')
 });
+function set_value(el){
+  el = $(el);
+  $('#panel_layout').val(el.val());
+  $('.new').removeClass('new');
+  el.addClass('new');
+}
 </script>
 <style>
+.new{
+  border: 2px solid #C0C0C0;
+}
 .focus{
   border: 2px solid red;
 }
@@ -74,23 +53,3 @@ $(document).ready(function() {
   float:left;
 }*/
 </style>
-<!--
-<div class="row"><div class="col-sm-12">
-  <div class="row"><div class="col-sm-12">
-    <div class="option col-md-4">
-      <button class="op_btn btn btn-default" type="button" style='width: 100%;'>100%</button>
-    </div>
-    <div class="option col-md-4">
-      <button class="op_btn btn btn-default" type="button" style='width: 50%;'>50%</button>
-      <button class="op_btn btn btn-default" type="button" style='width: 50%;'>50%</button>
-    </div>
-    <div class="option col-md-3" style='width: 31%;'>25%|25%|25%|25%</div>
-  </div></div>
-  <div class="row"><div class="col-sm-12">
-    <div class="option col-md-4">30%|70%</div>
-    <div class="option col-md-4">30%|40%|30%</div>
-    <div class="option col-md-3" style='width: 31%;'>70%|30%</div>
-  </div></div>    
-</div></div>
--->
-

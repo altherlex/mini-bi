@@ -15,9 +15,5 @@
          :footer => {} %>
   </div>
   <%#= f.input :pattern, :wrapper => :bs %>
-  <div class="panel panel-default">
-    <div id='container' class="panel-body">
-      <%=raw (render :partial => 'widgets/preview', :locals=> {widget: @widget, div_id:'container'})%>
-    </div>
-  </div>
+  <%=raw (render :partial => 'widgets/preview', :locals=> {widget: @widget, div_id:'container'})%>
 <% end %>

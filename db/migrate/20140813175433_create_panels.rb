@@ -4,7 +4,7 @@ class CreatePanels < ActiveRecord::Migration
       t.string :name, :default => 'New panel'
       t.string :description
       t.string :private
-      t.string :layout
+      t.string :layout, :default => '100' #100%
 
       t.timestamps
     end

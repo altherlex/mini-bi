@@ -12,6 +12,8 @@ en:
       private: 
         true: ! 'private'
         false: ! 'public'
+      layout:
+        ['100', '50,50', '25,25,25,25', '30,70', '30,40,30', '70,30']
     feeds:
       :url: 'http://www.google.com'
       :label: 'default'

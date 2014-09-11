@@ -32,7 +32,7 @@
     <%= content_tag :a, "Layout", :href => "#layout", :class => 'btn btn-default btn-sm', :data => {:toggle => 'modal'} %>
     <%= modal_dialog :id => "layout",
          :header => { :show_close => true, :dismiss => 'modal', :title => 'Layout' },
-         :body   => { :content => render(partial:'panels/layout', locals:{panel:@panel})},
+         :body   => { :content => render(partial:'panels/layout', locals:{panel:@panel, f:f})},
          :footer => { :content => content_tag(:button, 'Save', :class => 'btn') } %>
     <%#= f.text_field :layout %>
     <%= link_to 'Destroy', @panel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-danger' %>
@@ -40,14 +40,11 @@
 </div>
 <% end %>
 <div class="row">
-  <% @panel.widgets.each do |wid|%>
-    <div class="col-md-6">
-    <div class="panel panel-default">
-    <%div_id = 'container'+rand(1000).to_s %>
-      <div id='<%= div_id %>' class="panel-body">
-        <%=raw (render :partial => 'widgets/preview', :locals=> {widget: wid, div_id:div_id})%>
-      </div>
-    </div>
+  <% config_layout = @panel.layout.split(',')*@panel.widgets.size%>
+  <% @panel.widgets.each_with_index do |wid, index|%>
+    <%config = config_layout[index]%>
+    <div class='col-md-6' style='width:<%=config%>%'>
+      <%=raw (render :partial => 'widgets/preview', :locals=> {widget: wid})%>
     </div>
   <%end%>
 </div>
