@@ -54,4 +54,20 @@ module MiniBiHelper
       end
     end
   end
+  def panel_pdf_download(panel)
+    url = "http://10.0.37.44:3000/panels/#{panel.id}/?layout=100&print=true"
+    url_download(url, redirect_delay:5000)
+  end 
+  def alther
+     ((render "panels/print", :layout => 'clean'))
+  end
+  def pdf_convert(url_or_html, op={})
+    file_name = op.delete(:file_name)||'download'
+    kit = PDFKit.new(url_or_html, op)
+    file = kit.to_file(Rails.root.join('tmp', "#{file_name}.pdf").to_s)
+    return file
+    #pdf = kit.to_pdf
+    #send_data pdf, :filename => "panel_2.pdf", :type => "application/pdf"
+    #send_file '/assets/data/abc.pdf', :type=>"application/pdf", :x_sendfile=>true
+  end
 end 

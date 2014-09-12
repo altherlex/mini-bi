@@ -23,4 +23,22 @@ RSpec.describe MiniBiHelper, :type => :helper do
     #temporary
     @wid = Widget.find @wid.id
   end
+  context "export for pdf" do
+    it "converting a URL in pdf" do
+      file_name = 'panel'
+      file = pdf_convert('http://www.google.com', file_name:file_name)
+      local = Rails.root.join('tmp', file_name+'.pdf').to_s
+      expect( File.exists?(local) ).to eq true
+      expect(local).to eq(file.path)
+      expect(File.delete(file)).to eq 1
+    end
+    it "converting a HTML in pdf" do
+      file_name = 'panel1'
+      file = pdf_convert('<html><head><meta name="pdfkit-page_size" content="Letter"><head><body><h1>TESTE!!!</h1></body></html>', file_name:file_name)
+      local = Rails.root.join('tmp', file_name+'.pdf').to_s
+      expect( File.exists?(local) ).to eq true
+      expect(local).to eq(file.path)
+      expect(File.delete(file)).to eq 1
+    end
+  end
 end

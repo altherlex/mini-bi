@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h2><%= @panel.name%> <small><%= @panel.description %></small></h2>
+</div>
+<div class="row">
+  <% config_layout = (params[:layout]||@panel.layout).split(',')*@panel.widgets.size%>
+  <% @panel.widgets.each_with_index do |wid, index|%>
+    <%config = config_layout[index]%>
+    <div class='col-xs-12 col-md-6' style='width:<%=config%>%'>
+      <%=raw (render :partial => 'widgets/preview', :locals=> {widget: wid})%>
+    </div>
+  <%end%>
+</div>

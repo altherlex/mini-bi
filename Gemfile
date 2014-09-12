@@ -43,3 +43,5 @@ gem 'bootstrap-rails-engine'
 #gem "select2-rails", :branch=> 'master'
 #gem 'csv'
 gem 'whenever', :require => false
+gem 'pdfkit' #export html2pdf
+gem 'wkhtmltopdf-binary'

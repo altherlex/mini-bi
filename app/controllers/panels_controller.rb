@@ -1,4 +1,6 @@
 class PanelsController < MiniBiController
+  include MiniBiHelper
+
   # GET /panels
   # GET /panels.json
   def index
@@ -15,10 +17,29 @@ class PanelsController < MiniBiController
   def show
     @panel = Panel.find(params[:id])
 
+    #raise (render "panels/print", :layout => 'clean').inspect
+    #h = (render_to_body :print)
+    #h= alther.inspect
+    #html = my_test
+
     respond_to do |format|
-      format.html # show.html.erb
+      if params[:print].present? || params[:p].present?
+        format.html {render "panels/print", :layout => 'clean'}
+      else
+        format.html # show.html.erb
+      end
       format.json { render json: @panel }
+      format.pdf { panel_pdf_download(@panel) }
     end
+  end
+
+  def panel_pdf_download(panel)
+    kit = PDFKit.new("http://10.0.37.44:3000/panels/#{panel.id}/?layout=100&print=true", redirect_delay:5000)
+    # Get an inline PDF
+    file = kit.to_file(Rails.root.join('assets', 'data', 'panel_1.pdf'))
+    pdf = kit.to_pdf
+    send_data pdf, :filename => "#{panel.title}.pdf", :type => "application/pdf"
+    #send_file '/assets/data/abc.pdf', :type=>"application/pdf", :x_sendfile=>true
   end
 
   # GET /panels/new

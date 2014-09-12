@@ -28,7 +28,16 @@
     <%= best_in_place @panel, :private, :type => :checkbox, :collection => t(:'domain.panel.private') %>
   </span>
   <div style='float:right;'>
-    <button type="button" class="btn btn-default btn-sm">Exportar</button>
+<div class="dropdown" style='float: left;padding-right: 5px;'>
+  <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Export
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">PDF</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= panel_path(@panel)+'?layout=100&print=true'%>"><span class='glyphicon glyphicon-print'></span>  Print</a></li>
+  </ul>
+</div>
     <%= content_tag :a, "Layout", :href => "#layout", :class => 'btn btn-default btn-sm', :data => {:toggle => 'modal'} %>
     <%= modal_dialog :id => "layout",
          :header => { :show_close => true, :dismiss => 'modal', :title => 'Layout' },
@@ -40,10 +49,10 @@
 </div>
 <% end %>
 <div class="row">
-  <% config_layout = @panel.layout.split(',')*@panel.widgets.size%>
+  <% config_layout = (params[:layout]||@panel.layout).split(',')*@panel.widgets.size%>
   <% @panel.widgets.each_with_index do |wid, index|%>
     <%config = config_layout[index]%>
-    <div class='col-md-6' style='width:<%=config%>%'>
+    <div class='col-xs-12 col-md-6' style='width:<%=config%>%'>
       <%=raw (render :partial => 'widgets/preview', :locals=> {widget: wid})%>
     </div>
   <%end%>

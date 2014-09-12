@@ -37,7 +37,6 @@ RSpec.describe WidgetsHelper, :type => :helper do
     @config = for_widget(@wid)
     expect(@config[:series].first.keys).to eq [:type, :name, :data]
     expect(@config[:series].first[:data]).to be_instance_of Array
-    raise @config[:series].inspect
     expect(@config[:series].first[:data].first.size).to eq 2
   end
   it "Export CSV" do
