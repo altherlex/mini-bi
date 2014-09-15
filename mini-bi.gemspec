@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'shoulda'
   s.add_development_dependency 'pdfkit'
+  s.add_dependency 'delayed_job'
 
   s.add_dependency "ibm_db", '2.5.11'
 end

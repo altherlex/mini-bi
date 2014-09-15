@@ -17,11 +17,6 @@ class PanelsController < MiniBiController
   def show
     @panel = Panel.find(params[:id])
 
-    #raise (render "panels/print", :layout => 'clean').inspect
-    #h = (render_to_body :print)
-    #h= alther.inspect
-    #html = my_test
-
     respond_to do |format|
       if params[:print].present? || params[:p].present?
         format.html {render "panels/print", :layout => 'clean'}
@@ -29,7 +24,15 @@ class PanelsController < MiniBiController
         format.html # show.html.erb
       end
       format.json { render json: @panel }
-      format.pdf { panel_pdf_download(@panel) }
+      format.pdf { 
+        #str_template = Delayed::Job.enqueue render_to_string("panels/print", layout:'clean', formats: :html)
+        #str_template = render_to_string("panels/print", layout:'clean', formats: :html)
+        str_template =  request.url.sub request.original_fullpath, panel_path(@panel, layout:100, print:true)
+     #raise str_template.inspect
+        #str_template = request.host+"pame"
+        pdf = PDFKit.new str_template, {redirect_delay:5000}
+        send_data pdf.to_pdf, filename: "#{@panel.name.gsub(' ', '_')}#{I18n.l(Time.now, :format => :to_pdf)}.pdf", type: "application/pdf"
+      }
     end
   end
 

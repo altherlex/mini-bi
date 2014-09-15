@@ -19,11 +19,28 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe PanelsController, :type => :controller do
+  before(:each) do
+    @universe = Universe.create({
+      name:'My own universe',
+      sql:'select count(*) as_count, id, name, description from glb.universes'})
+    @panel = Panel.create({name:'Panel'})
+    # ===== 1 Chart =====
+    @wid = Widget.new({universe_id:@universe.id, panel_id:@panel.id, pattern:'column'})
+    @wid.d_cols = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
+    @wid.m_cols = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
+    @wid.save!
+    # ===== 2 Chart =====
+    @wid1 = Widget.new({universe_id:@universe.id, panel_id:@panel.id, pattern:'pie'})
+    @wid1.d_cols = [@universe.columns.dim.detect{|i| i.name.include?('NAME')}.id]
+    @wid1.m_cols = [@universe.columns.metric.detect{|i| i.name.include?('AS_COUNT')}.id]
+    @wid1.save!
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Panel. As you add validations to Panel, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
+    #@panel.attributes
     skip("Add a hash of attributes valid for your model")
   }
 
@@ -51,8 +68,17 @@ RSpec.describe PanelsController, :type => :controller do
       expect(assigns(:panel)).to eq(panel)
     end
   end
+  
+  # Show export for PDF
+  describe "GET show for PDF" do
+    it "assigns the requested panel as @panel" do
+      panel = Panel.create! valid_attributes
+      get :show, {:id => panel.to_param}, valid_session
+      expect(assigns(:panel)).to eq(panel)
+    end
+  end
 
-  describe "GET new" do
+  describe "GET new", focus:true do
     it "assigns a new panel as @panel" do
       get :new, {}, valid_session
       expect(assigns(:panel)).to be_a_new(Panel)

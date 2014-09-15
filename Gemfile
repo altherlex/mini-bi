@@ -45,3 +45,4 @@ gem 'bootstrap-rails-engine'
 gem 'whenever', :require => false
 gem 'pdfkit' #export html2pdf
 gem 'wkhtmltopdf-binary'
+gem 'delayed_job' #asynchronous priority queue system

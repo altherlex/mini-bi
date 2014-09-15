@@ -1,3 +1,10 @@
-<%= render 'form' %>
-
-<%#= link_to 'Back', panels_path %>
+<%= simple_form_for(@panel) do |f| %>
+  <%= nav_menu do |m| %>
+    <%= f.button :submit, class:"btn btn-primary active" %>
+    <%= link_to 'Back', panels_path, class:"btn btn-default" %>
+  <%end%>
+  <br>
+  <%= f.input :name%>
+  <%= f.input :description%>
+  <%= f.input :private, as: :select, collection: domain('panel.private') %>
+<% end %>

@@ -4,10 +4,6 @@ en:
   domain:
     column: 
       tpo_objeto: [['Dimension', 'D'], ['Metric', 'M']]
-    #formats:
-    #  default: ! '%m-%d-%Y'
-    #  long: ! '%B %d, %Y'
-    #  short: ! '%b %d'
     panel:
       private: 
         true: ! 'private'
@@ -65,6 +61,7 @@ en:
       default: ! '%m-%d-%Y'
       long: ! '%B %d, %Y'
       short: ! '%b %d'
+      to_pdf: ! '%m%d%Y%H%M'
     month_names:
     -
     - January
@@ -232,5 +229,6 @@ en:
       default: ! '%a, %d %b %Y %I:%M:%S %p %Z'
       long: ! '%B %d, %Y %I:%M %p'
       short: ! '%d %b %I:%M %p'
+      to_pdf: ! '%m%d%Y%H%M'
     pm: pm
 

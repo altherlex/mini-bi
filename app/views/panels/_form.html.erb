@@ -34,7 +34,7 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">PDF</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= panel_path(@panel, format: :pdf)%>">PDF</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= panel_path(@panel)+'?layout=100&print=true'%>"><span class='glyphicon glyphicon-print'></span>  Print</a></li>
   </ul>
 </div>
