@@ -9,7 +9,7 @@ Make your report/chart in 2 steps:
 == Screenshot
 === Dashboard
 
-<img width="180" height="35" src="https://lh6.googleusercontent.com/-fs7T7xIU0z8/VBtDqCThgGI/AAAAAAAACFU/on1mTJJ1FSs/w1278-h604-no/dashboard.jpg"</img>
+<img src="https://lh6.googleusercontent.com/-fs7T7xIU0z8/VBtDqCThgGI/AAAAAAAACFU/on1mTJJ1FSs/w1278-h604-no/dashboard.jpg"></img>
 
 == Tools
 
