@@ -13,7 +13,7 @@ Make your report/chart in 2 steps:
 
 ## Tools
 
-<a href="highcharts.com/">Highcharts</a>
+<a href="http://www.highcharts.com/">Highcharts</a>
 
 
 This project rocks and uses MIT-LICENSE.
