@@ -17,11 +17,11 @@
   <h2><%= best_in_place @panel, :name%> <small><%= best_in_place @panel, :description%></small></h2>
 </div>
 <div class="well well-sm">
-  <%= content_tag :a, "+ Add widget", :href => "#widget", :class => 'btn btn-default btn-sm', :data => {:toggle => 'modal'} %>
-  <%= modal_dialog :id => "widget",
+  <%= content_tag :a, "+ Add widget", :href => "#widget", class:'btn btn-default btn-sm',data:{toggle:'modal', remote:true, 'data-controls-modal'=>"modal-window", 'data-backdrop'=>true, 'data-keyboard'=>true} %>
+  <%= modal_dialog id:"widget", 'size'=>'popup_media',
          :header => { :show_close => true, :dismiss => 'modal', :title=>'New widget'},
-         :body   => { :content => 'This is the body' },
-         :footer => { :content => content_tag(:button, 'Save', :class => 'btn') } %>
+         :body   => { :content => render(template:'widgets/new', locals:{popup:true}), style:'height: 357px;' },
+		 :footer => { :content => modal_cancel_button('Close', {})+content_tag(:button, 'Save', :class => 'btn') } %>
 
   <button type="button" class="btn btn-default btn-sm">Email</button>
   <span style='cursor: pointer;'>

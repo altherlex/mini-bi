@@ -3,7 +3,7 @@
         <%#= menu_divider %>
         <%= drop_down("Panels") do %>
           <% Panel.all.each do |panel|%> 
-            <%= menu_item panel.name, edit_panel_path(panel) %>
+            <%= menu_item panel.name, panel_path(panel) %>
           <%end%>
           <%= menu_item "+ Novo panel", new_panel_path %>
         <% end %>

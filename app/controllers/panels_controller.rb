@@ -16,6 +16,7 @@ class PanelsController < MiniBiController
   # GET /panels/1.json
   def show
     @panel = Panel.find(params[:id])
+    @widget = Widget.new
 
     respond_to do |format|
       if params[:print].present? || params[:p].present?

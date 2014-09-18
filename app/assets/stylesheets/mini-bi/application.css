@@ -8,9 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require bootstrap/bootstrap
  *= require_tree .
+ *= require_self
  * require mini-bi/bootstrap_and_overrides.css.less
  * require twitter-bootstrap-static/fontawesome
  * require twitter-bootstrap-static/bootstrap
@@ -21,3 +21,6 @@
  * require select2-bootstrap
  */
 
+.popup_media{
+  width: 800px;
+}

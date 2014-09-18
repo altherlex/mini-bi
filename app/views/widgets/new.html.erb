@@ -1,14 +1,15 @@
-<h1>New widget</h1>
-
 <%= simple_form_for(@widget) do |f| %>
   <%= nav_menu do |m| %>
     <%= f.button :submit, class:"btn btn-primary active" %>
     <%= link_to 'Back', widgets_path, class:"btn btn-default" %>
   <%end%>
-
-  <%= f.association :panel %>
+  <%unless defined? popup%>
+    <%= f.association :panel %>
+  <%end%>
   <%= f.association :universe %>
   <%= f.input :title %>
   <%= f.input :subtitle %>
   <%= f.input :pattern, as: :select, collection: domain('widget.pattern') %>
+  <%= f.input :d_cols, collection: @widget.columns.dim, as: :select, input_html: {multiple:'true', style:'width:300px', placeholder:'Dimension'} %>
+  <%= f.input :m_cols, collection: @widget.columns.metric, as: :select, input_html: {multiple:'true', style:'width:300px', placeholder:'Metric'} %>
 <% end %>
