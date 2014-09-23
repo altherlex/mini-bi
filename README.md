@@ -1,7 +1,5 @@
 # MiniBi
 
-If useful for you:
-
 <script data-gratipay-username="altherlex" src="//gttp.co/v1.js">
 
 Maker reports and charts easier for your application.
