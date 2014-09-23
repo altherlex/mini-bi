@@ -1,4 +1,4 @@
-[![Gittip](http://img.shields.io/gratipay/altherlex.svg?style=flat)](http://gittip.com/altherlex)
+[![Gittip](http://img.shields.io/gratipay/altherlex.svg)](http://gittip.com/altherlex)
 [![Code Climate](https://codeclimate.com/repos/5421a327695680154600a098/badges/0a3f7e6a273d8ecb611c/gpa.svg)](https://codeclimate.com/repos/5421a327695680154600a098/feed)
 
 # MiniBi
