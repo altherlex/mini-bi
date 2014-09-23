@@ -1,3 +1,6 @@
+[![Gittip
+](http://img.shields.io/gratipay/altherlex.svg?style=flat)](http://gittip.com/altherlex)
+
 # MiniBi
 
 <script data-gratipay-username="altherlex" src="//gttp.co/v1.js">
