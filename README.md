@@ -1,11 +1,17 @@
 # MiniBi
 
+If useful:
+<script data-gratipay-username="altherlex"
+        src="//gttp.co/v1.js"></script>
+
 Maker reports and charts easier for your application.
 
 Make your report/chart in 2 steps:
 
 1 - UNIVERSE: mount the query
+
 2 - WIDGET: choose the columns (dimension and metric) and filters
+
 ## Screenshot
 ### Dashboard
 
