@@ -14,7 +14,7 @@ Make your own reports and charts easy and fast in your rails application.
 
 (Ruby on Rails and other gem dependencies will be installed automatically by Bundler.)
 
-### Make your report/chart in 2 steps:
+## How use: Make your report/chart in 2 steps:
 
 <table>
   <tr>
