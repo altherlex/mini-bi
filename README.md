@@ -5,7 +5,7 @@
 
 <script data-gratipay-username="altherlex" src="//gttp.co/v1.js">
 
-Makeing reports and charts easy and fast in your rails application.
+Make your own reports and charts easy and fast in your rails application.
 
 ### Make your report/chart in 2 steps:
 
