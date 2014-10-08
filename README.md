@@ -14,10 +14,34 @@ Maker reports and charts easier for your application.
 2 - WIDGET: choose the columns (dimension and metric) and filters
 ```
 
-## Screenshot
-### Dashboard
+## How make your own chart/report easy and fast
 
-<img src="https://lh6.googleusercontent.com/-fs7T7xIU0z8/VBtDqCThgGI/AAAAAAAACFU/on1mTJJ1FSs/w1278-h604-no/dashboard.jpg"></img>
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://lh3.googleusercontent.com/-_HVkdMuQ60g/VDVBpJpStUI/AAAAAAAACHg/t181BRZPNFw/w699-h675-no/simple_universe.png" target="_blank" title="Create Universe">
+        <img src="https://github.com/fatfreecrm/fatfreecrm.github.com/raw/master/images/task_create_t.png" alt="Create Universe">
+      </a>
+      <br /><em>#1 Universe: Mounting query</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://lh4.googleusercontent.com/-ESb-yaQ-ik4/VDVA49t9ffI/AAAAAAAACHM/eCVA2FatE8Y/w700-h604-no/widget.png" target="_blank" title="Create Widget">
+       <img src="https://github.com/fatfreecrm/fatfreecrm.github.com/raw/master/images/task_create_t.png" alt="Create Widget">
+      </a>
+      <br /><em>#2 Widget: Mounting chart or report</em>
+    </td>
+  </tr> 
+  <tr>
+    <td align="center">
+      <a href="https://lh6.googleusercontent.com/-fs7T7xIU0z8/VBtDqCThgGI/AAAAAAAACFU/on1mTJJ1FSs/w1278-h604-no/dashboard.jpg" target="_blank" title="Result">
+        <img src="https://github.com/fatfreecrm/fatfreecrm.github.com/raw/master/images/task_create_t.png" alt="Result">
+      </a>
+      <br /><em>Ready!</em>
+    </td>
+  </tr>     
+</table>
 
 ## Tools
 
