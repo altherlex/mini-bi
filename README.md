@@ -51,6 +51,10 @@ Make your own reports and charts easy and fast in your rails application.
 <a href="http://www.highcharts.com/">Highcharts</a>
 
 ### TODO
-export for xls:https://github.com/randym/axlsx
+
+* popup to create a widget in panel
+* choose dimension/metric column when create a new widget
+* export for xls:https://github.com/randym/axlsx
+
 
 This project rocks and uses MIT-LICENSE.
