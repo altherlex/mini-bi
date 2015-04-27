@@ -7,8 +7,8 @@ Make your own reports and charts easy and fast in your rails application.
 
 ## System Requirements
 
-* Rails3
-* Ruby 1.9
+* Rails3+
+* Ruby 1.9+
 
 (Ruby on Rails and other gem dependencies will be installed automatically by Bundler.)
 
