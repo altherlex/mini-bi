@@ -3,8 +3,6 @@
 
 # MiniBi
 
-<script data-gratipay-username="altherlex" src="//gttp.co/v1.js">
-
 Make your own reports and charts easy and fast in your rails application.
 
 ## System Requirements
